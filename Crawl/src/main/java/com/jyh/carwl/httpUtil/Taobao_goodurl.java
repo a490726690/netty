@@ -11,6 +11,8 @@ import org.apache.http.impl.client.HttpClients;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by jyh-mac on 2018/11/2.
@@ -59,8 +61,9 @@ public class Taobao_goodurl {
         }
         result = result.substring(result.indexOf("\"itemlist\":")+11,result.indexOf(",\"recommendAuctions\""))+"}}";
         JSONObject json = new JSONObject();
+        List<JSONObject> items =new ArrayList<>();
         json= (JSONObject) JSONObject.parse(result);
-        JSONArray itemList = json.getJSONObject("data").getJSONArray("atcions");
+        JSONArray itemList = json.getJSONObject("data").getJSONArray("auctions");
         for (int i=0;i<itemList.size();i++){
             JSONObject item =new JSONObject();
             item.put("title",itemList.getJSONObject(i).getString("raw_title"));//商品名
@@ -76,7 +79,9 @@ public class Taobao_goodurl {
             item.put("category",itemList.getJSONObject(i).getString("category"));//category 品类id?
             item.put("nick",itemList.getJSONObject(i).getString("nick"));//商家id名
             item.put("pid",itemList.getJSONObject(i).getString("pid"));//pid 暂时不知道是什么 可能是推广码?
+            items.add(item);
         }
+        String aas="hh";
         System.out.println(result);
     }
 }
