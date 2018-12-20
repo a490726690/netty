@@ -17,4 +17,8 @@ public class MyWebSocketHandler extends SimpleChannelInboundHandler<Object> {
 
     }
 
+    @Override
+    protected void channelRead0(ChannelHandlerContext channelHandlerContext, Object o) throws Exception {
+
+    }
 }
